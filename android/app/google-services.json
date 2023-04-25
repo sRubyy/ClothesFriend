@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "662047131815",
+    "project_id": "clothesfriend-72a94",
+    "storage_bucket": "clothesfriend-72a94.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662047131815:android:5a3dd00d1f09666a11b382",
+        "android_client_info": {
+          "package_name": "com.example.projectapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662047131815-933p2fqh1tb7iujd9or7jqigds48bq62.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHjyd927wDwlEaBgeUpGm-BR1wc5qmnOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662047131815-933p2fqh1tb7iujd9or7jqigds48bq62.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
