@@ -3,6 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../model/shop_model.dart';
+
 class MapSample extends StatefulWidget {
   const MapSample({Key? key}) : super(key: key);
 
@@ -14,17 +16,37 @@ class MapSampleState extends State<MapSample> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
-  static const Marker _kShopMarker = Marker(
-    markerId: MarkerId('_Shop'),
-    infoWindow: InfoWindow(title: "เสื้อยืดมือสองbyหนึ่งศาลายา"),
-    icon: BitmapDescriptor.defaultMarker,
-    position: LatLng(13.810895804903794, 100.32228714350008),
-  );
+  late ShopModel _shop; // define a field to store the ShopModel
 
-  static const CameraPosition _kShop = CameraPosition(
-    target: LatLng(13.810895804903794, 100.32228714350008),
-    zoom: 20,
-  );
+  static Marker shopToMarker(ShopModel shop) {
+    return Marker(
+      markerId: MarkerId(shop.id!),
+      position: LatLng(shop.lat, shop.lng),
+      infoWindow: InfoWindow(
+        title: shop.name,
+      ),
+    );
+  }
+
+  static CameraPosition shopToCarmeraPosition(ShopModel shop) {
+    return CameraPosition(
+      target: LatLng(shop.lat, shop.lng),
+      zoom: 20,
+    );
+  }
+
+  late final Marker _kShopMarker;
+
+  late final CameraPosition _kShop;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // get the shop object from the route arguments
+    _shop = ModalRoute.of(context)!.settings.arguments as ShopModel;
+    _kShopMarker = shopToMarker(_shop);
+    _kShop = shopToCarmeraPosition(_shop);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +57,7 @@ class MapSampleState extends State<MapSample> {
           icon: Icon(Icons.arrow_back),
           color: Colors.white,
           onPressed: () {
-            Navigator.pushNamed(context, '/home');
+            Navigator.pushNamed(context, '/home', arguments: {'selectedIndex': 1});
           },
         ),
       ),
@@ -75,13 +97,13 @@ class MapSampleState extends State<MapSample> {
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Text(
-                              "น้ำหนึ่ง เสื้อผ้าแฟชั่น มือสองเกรด A",
+                              _shop.name,
                               textAlign: TextAlign.center,
                             ),
                             Text(
-                              "Salaya, Phutthamonthon District,\n Nakhon Pathom 73170",
+                              _shop.address,
                               textAlign: TextAlign.center,
                             ),
                           ],

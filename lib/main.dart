@@ -29,7 +29,6 @@ class MyApp extends StatelessWidget {
         '/regis':(context) => RegisterPage(),
         '/home':(context) => HomePage(),
         '/map':(context) => MapSample(),
-        '/shoplist':(context) => ShopList(),
       },
     );
   }

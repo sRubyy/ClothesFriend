@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:projectapp/normalpages/profilepage.dart';
 import 'package:projectapp/normalpages/shoplist.dart';
 
+import '../model/bottom_navigation_bar.dart';
 import 'startpage.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final int selectedIndex;
+
+  const HomePage({super.key, this.selectedIndex = 0});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -14,11 +17,27 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
+  @override
+  void initState() {
+    super.initState();
+    // use the passed argument or set default value
+    _selectedIndex = widget.selectedIndex;
+  }
+
   final _pages = [
     const StartPage(),
     const ShopList(),
     const ProfilePage(),
   ];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final arguments = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    if (arguments != null && arguments.containsKey('selectedIndex')) {
+      _selectedIndex = arguments['selectedIndex'] as int;
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -31,7 +50,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.orange[50],
       body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: CustomBottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -46,40 +65,9 @@ class _HomePageState extends State<HomePage> {
             label: 'Profile',
           ),
         ],
-        backgroundColor: Colors.orange[300],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
-    );
-  }
-}
-
-class MyBox extends StatelessWidget {
-  final String img;
-  final String text;
-
-  const MyBox({super.key, required this.img, required this.text});
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
-          borderRadius: BorderRadius.circular(5)),
-      width: 130,
-      height: 100,
-      child: Row(children: [
-        Container(
-          margin: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-          width: 35,
-          height: 35,
-          child: Image.asset(img),
-        ),
-        Container(
-          margin: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-          child: Text(text),
-        )
-      ]),
     );
   }
 }
