@@ -17,7 +17,7 @@ class GetShopData extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
-            return Text('Shop Name: ${data['name']}');
+            return Text('${data['name']}');
           }
           return const Text('loading...');
         }));

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -54,7 +53,7 @@ class MapSampleState extends State<MapSample> {
       appBar: AppBar(
         backgroundColor: Colors.orange[300],
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           color: Colors.white,
           onPressed: () {
             Navigator.pushNamed(context, '/home', arguments: {'selectedIndex': 1});
@@ -93,21 +92,19 @@ class MapSampleState extends State<MapSample> {
                         height: 100,
                       ),
                     ),
-                    Container(
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              _shop.name,
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              _shop.address,
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            _shop.name,
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            _shop.address,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
                       ),
                     )
                   ],

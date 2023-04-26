@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projectapp/normalpages/addshoppage.dart';
 import 'package:projectapp/normalpages/profilepage.dart';
 import 'package:projectapp/normalpages/shoplist.dart';
 
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   final _pages = [
     const StartPage(),
     const ShopList(),
+    const AddShop(),
     const ProfilePage(),
   ];
 
@@ -59,6 +61,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: Icon(IconData(0xf013d, fontFamily: 'MaterialIcons')),
             label: 'Explore',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(IconData(0xf529, fontFamily: 'MaterialIcons')),
+            label: 'Add Shop',
           ),
           BottomNavigationBarItem(
             icon: Icon(IconData(0xf522, fontFamily: 'MaterialIcons')),

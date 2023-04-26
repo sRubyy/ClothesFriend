@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projectapp/model/shop_model.dart';
-import 'package:projectapp/normalpages/profilepage.dart';
-import 'package:projectapp/normalpages/startpage.dart';
 
 import '../read data/get_shop.dart';
 
@@ -52,14 +50,21 @@ class _ShopListState extends State<ShopList> {
                     final shop = shops[index];
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: MaterialButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/map', arguments: shop);
-                        },
-                        child: ListTile(
-                          title: GetShopData(shopId: shops[index].id!),
-                          tileColor: Colors.grey,
+                      child: ListTile(
+                        leading: Image.asset(
+                          "assets/images/store.png",
+                          width: 60,
+                          height: 60,
                         ),
+                        title: GetShopData(shopId: shops[index].id!),
+                        tileColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          side: const BorderSide(width: 1),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        onTap: () {
+                          Navigator.pushNamed(context, '/map', arguments: shop);
+                        }
                       ),
                     );
                   },
