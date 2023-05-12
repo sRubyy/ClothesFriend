@@ -16,7 +16,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final _nameControll = TextEditingController();
   final _emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   bool _isEmailValid = true;
-  bool _signUpPass = false;
 
   Future signUp() async {
     if (!_emailRegex.hasMatch(_emailControll.text.trim())) {
@@ -34,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
       );
       // add user details
       addUserDetails(_nameControll.text.trim(), _emailControll.text.trim());
-      _signUpPass = true;
+      Navigator.pushNamed(context, '/login');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -250,9 +249,6 @@ class _RegisterPageState extends State<RegisterPage> {
                         );
                       } else {
                         signUp();
-                        if(_signUpPass){
-                          Navigator.pushNamed(context, '/login');
-                        }
                       }
                     },
                     child: Container(

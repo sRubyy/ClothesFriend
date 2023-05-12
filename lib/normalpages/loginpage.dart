@@ -13,7 +13,6 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordControll = TextEditingController();
   final _emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   bool _isEmailValid = true;
-  bool _signInPass = false;
 
   Future<void> signIn() async {
     if (!_emailRegex.hasMatch(_emailControll.text.trim())) {
@@ -28,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
         email: _emailControll.text.trim(),
         password: _passwordControll.text.trim(),
       );
-      _signInPass = true;
+      Navigator.pushNamed(context, '/home');
     } on FirebaseAuthException catch (e) {
       String errorMessage = 'Login Failed';
       if (e.code == 'user-not-found') {
@@ -217,9 +216,6 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       } else {
                         signIn();
-                        if(_signInPass){
-                          Navigator.pushNamed(context, '/home');
-                        }
                       }
                     },
                     child: Container(
